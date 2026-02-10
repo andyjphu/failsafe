@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Failsafe — Safety Infrastructure for AI Agents",
+  title: "Failsafe — Safety Infrastructure for Multi-AI Agent Systems",
   description:
-    "Contract testing and compliance enforcement for multi-agent systems. Validate every handoff. Enforce compliance. Block unsafe interactions.",
+    "Validate every agent-to-agent handoff. Enforce delegation boundaries. Contain cascading failures. The guardrail layer for multi-agent AI systems.",
 };
 
 export default function RootLayout({

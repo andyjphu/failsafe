@@ -15,21 +15,22 @@ export function CTA() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-5xl font-bold tracking-[-0.02em] mb-6">
-            Ship safer agents
+            Your agents need management
           </h2>
-          <p className="text-muted-foreground text-lg mb-12 max-w-md mx-auto">
-            Open source. Framework agnostic. Zero runtime dependencies.
+          <p className="text-muted-foreground text-lg mb-12 max-w-lg mx-auto">
+            Open source. Protocol-native. Works with A2A, MCP, and every major
+            agent framework.
           </p>
           <div className="flex items-center justify-center gap-4">
             <Button size="lg" className="text-sm px-8 rounded-full">
-              Get Started
+              Apply for Early Access
             </Button>
             <Button
               variant="outline"
               size="lg"
               className="text-sm group rounded-full"
             >
-              Star on GitHub
+              Join Design Partners
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </div>

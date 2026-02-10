@@ -31,8 +31,9 @@ export function Founders() {
         >
           <p className="text-muted-foreground text-center text-lg leading-relaxed mb-16">
             Two engineers who met through a mutual friend in 2025, travelled the
-            world together, and decided to build the safety layer they saw the
-            industry would need as AI agents go autonomous.
+            world together, and saw the same thing coming: multi-agent systems
+            are going to production, and they need a management layer that
+            doesn&apos;t exist yet. So we&apos;re building it.
           </p>
         </motion.div>
 

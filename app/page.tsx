@@ -2,6 +2,7 @@ import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Features } from "@/components/features";
 import { CodeExample } from "@/components/code-example";
+import { WhyNow } from "@/components/why-now";
 import { Founders } from "@/components/founders";
 import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <Features />
       <CodeExample />
+      <WhyNow />
       <Founders />
       <CTA />
       <Footer />

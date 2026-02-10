@@ -1,42 +1,49 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Braces, Shield, ShieldCheck, ScrollText } from "lucide-react";
+import { FlaskConical, Activity, Scale } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface Feature {
   icon: LucideIcon;
   title: string;
-  description: string;
-  span?: 2;
+  subtitle: string;
+  points: string[];
 }
 
 const features: Feature[] = [
   {
-    icon: Braces,
-    title: "Typed Contracts",
-    description:
-      "Define what valid looks like between any two agents. Schema validation, type checking, and pattern matching — enforced at every handoff boundary.",
-    span: 2,
+    icon: FlaskConical,
+    title: "Test",
+    subtitle: "Simulate multi-agent interactions before production",
+    points: [
+      "Agent-to-agent handoff contract validation",
+      "Delegation chain and scope narrowing tests",
+      "Combinatorial state space exploration",
+      "Regression testing for coordination protocols",
+    ],
   },
   {
-    icon: Shield,
-    title: "Policy Engine",
-    description:
-      "Pluggable compliance rules. PII detection, trading auth, audit requirements — out of the box.",
+    icon: Activity,
+    title: "Monitor",
+    subtitle: "See how failures propagate across your agent network",
+    points: [
+      "Cross-agent trace visualization",
+      "Cascading failure detection and circuit breakers",
+      "Real-time inter-agent message validation",
+      "Privilege escalation and authority creep alerts",
+    ],
   },
   {
-    icon: ShieldCheck,
-    title: "Fail Closed",
-    description:
-      "Unsafe handoffs are blocked, not logged. Safety is the default, not an afterthought.",
-  },
-  {
-    icon: ScrollText,
-    title: "Audit Trail",
-    description:
-      "Immutable record of every validation. Pass rates, violation breakdowns, per-agent statistics. Built for SOX, SEC, and FINRA.",
-    span: 2,
+    icon: Scale,
+    title: "Comply",
+    subtitle: "Prove what your agents did and why",
+    points: [
+      "EU AI Act-ready audit trails",
+      "Immutable record of every handoff and delegation",
+      "Automated compliance reporting (SOX, SEC, FINRA)",
+      "Agent identity and permission management",
+    ],
   },
 ];
 
@@ -52,10 +59,11 @@ export function Features() {
           className="text-center mb-20"
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] mb-4">
-            Built for production
+            The guardrail layer between your agents
           </h2>
           <p className="text-muted-foreground text-lg max-w-lg mx-auto">
-            The primitives you need to ship multi-agent systems safely.
+            Multi-agent failures are categorically different from single-agent
+            failures. Failsafe is built for the coordination layer.
           </p>
         </motion.div>
 
@@ -66,18 +74,29 @@ export function Features() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className={`bg-background p-10 group transition-colors duration-300 hover:bg-muted/30 ${
-                feature.span === 2 ? "md:col-span-2" : ""
-              }`}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-background p-10 group transition-colors duration-300 hover:bg-muted/30"
             >
               <feature.icon className="h-5 w-5 text-muted-foreground/60 mb-5 transition-colors duration-300 group-hover:text-foreground/80" />
-              <h3 className="text-base font-semibold mb-2 tracking-tight">
+              <h3 className="text-lg font-semibold mb-1 tracking-tight">
                 {feature.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-md">
-                {feature.description}
+              <p className="text-muted-foreground text-sm mb-5">
+                {feature.subtitle}
               </p>
+              <ul className="space-y-2.5">
+                {feature.points.map((point) => (
+                  <li
+                    key={point}
+                    className="text-muted-foreground/70 text-[13px] leading-snug flex items-start gap-2"
+                  >
+                    <span className="text-muted-foreground/30 mt-1 shrink-0">
+                      &mdash;
+                    </span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>

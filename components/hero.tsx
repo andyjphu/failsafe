@@ -5,7 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
-const frameworks = ["LangGraph", "AutoGen", "CrewAI", "A2A Protocol"];
+const frameworks = ["A2A Protocol", "MCP", "LangGraph", "AutoGen", "CrewAI"];
+
+const stats = [
+  { value: "40%", label: "of agent projects canceled by 2027", source: "Gartner" },
+  { value: "87%", label: "multi-agent failure rate in production", source: "NeurIPS" },
+  { value: "Aug 2026", label: "EU AI Act becomes enforceable" },
+];
 
 export function Hero() {
   return (
@@ -63,8 +69,8 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-12 leading-relaxed"
         >
-          Contract testing and compliance enforcement for multi-agent systems.
-          Validate every handoff. Catch violations before production.
+          Validate every agent-to-agent handoff. Enforce delegation boundaries.
+          Contain failures before they cascade across your system.
         </motion.p>
 
         <motion.div
@@ -74,7 +80,7 @@ export function Hero() {
           className="flex items-center justify-center gap-4"
         >
           <Button size="lg" className="text-sm px-8 rounded-full">
-            Get Started
+            Apply for Early Access
           </Button>
           <Button
             variant="ghost"
@@ -86,15 +92,42 @@ export function Hero() {
           </Button>
         </motion.div>
 
+        {/* Stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex items-center justify-center gap-3 mt-20 text-[13px] text-muted-foreground/40"
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-0 mt-20"
+        >
+          {stats.map((stat, i) => (
+            <div key={stat.value} className="flex items-center gap-6 sm:gap-0">
+              {i > 0 && (
+                <div className="hidden sm:block h-10 w-px bg-border/30 mx-8" />
+              )}
+              <div className="text-center">
+                <div className="text-xl sm:text-2xl font-bold tracking-tight">
+                  {stat.value}
+                </div>
+                <div className="text-[11px] text-muted-foreground/50 mt-1">
+                  {stat.label}
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Framework compatibility */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="flex items-center justify-center gap-3 mt-12 text-[13px] text-muted-foreground/30"
         >
           {frameworks.map((fw, i) => (
             <span key={fw} className="flex items-center gap-3">
-              {i > 0 && <span className="text-muted-foreground/20">&middot;</span>}
+              {i > 0 && (
+                <span className="text-muted-foreground/15">&middot;</span>
+              )}
               {fw}
             </span>
           ))}

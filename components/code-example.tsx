@@ -2,25 +2,29 @@
 
 import { motion } from "framer-motion";
 
-const codeHTML = `<span class="text-purple-400">from</span> failsafe <span class="text-purple-400">import</span> <span class="text-blue-400">Contract</span>, <span class="text-blue-400">Guard</span>
+const codeHTML = `<span class="text-purple-400">from</span> failsafe <span class="text-purple-400">import</span> <span class="text-blue-400">Contract</span>, <span class="text-blue-400">Guard</span>, <span class="text-blue-400">DelegationChain</span>
 
-<span class="text-neutral-500"># Define what valid looks like</span>
+<span class="text-neutral-500"># Define the handoff contract between two agents</span>
 contract = <span class="text-blue-400">Contract</span>(
     consumer=<span class="text-emerald-400">"support-agent"</span>,
     provider=<span class="text-emerald-400">"trading-agent"</span>,
-    fields={
+    handoff_schema={
         <span class="text-emerald-400">"action"</span>: {<span class="text-emerald-400">"type"</span>: <span class="text-emerald-400">"string"</span>, <span class="text-emerald-400">"enum"</span>: [<span class="text-emerald-400">"buy"</span>, <span class="text-emerald-400">"sell"</span>]},
         <span class="text-emerald-400">"amount"</span>: {<span class="text-emerald-400">"type"</span>: <span class="text-emerald-400">"number"</span>, <span class="text-emerald-400">"max"</span>: <span class="text-orange-300">10_000</span>},
         <span class="text-emerald-400">"account"</span>: {<span class="text-emerald-400">"type"</span>: <span class="text-emerald-400">"string"</span>, <span class="text-emerald-400">"masked"</span>: <span class="text-purple-400">True</span>},
     },
-    policies=[<span class="text-emerald-400">"fin-pii"</span>, <span class="text-emerald-400">"fin-auth"</span>]
+    delegation=<span class="text-blue-400">DelegationChain</span>(
+        max_depth=<span class="text-orange-300">3</span>,
+        scope_narrows=<span class="text-purple-400">True</span>,
+    ),
+    policies=[<span class="text-emerald-400">"fin-pii"</span>, <span class="text-emerald-400">"fin-auth"</span>, <span class="text-emerald-400">"cascade-prevention"</span>]
 )
 
-<span class="text-neutral-500"># Every handoff is validated</span>
+<span class="text-neutral-500"># Validate the handoff before it reaches the next agent</span>
 <span class="text-purple-400">with</span> <span class="text-blue-400">Guard</span>(contract) <span class="text-purple-400">as</span> g:
-    result = g.<span class="text-blue-400">validate</span>(payload)
-    <span class="text-neutral-500"># → BLOCKED: Unmasked account number detected</span>
-    <span class="text-neutral-500"># → BLOCKED: Insufficient trading authorization</span>`;
+    result = g.<span class="text-blue-400">validate_handoff</span>(payload)
+    <span class="text-neutral-500"># → BLOCKED: Privilege escalation — agent exceeds delegated scope</span>
+    <span class="text-neutral-500"># → BLOCKED: Unmasked account number in inter-agent message</span>`;
 
 export function CodeExample() {
   return (
@@ -34,10 +38,11 @@ export function CodeExample() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] mb-4">
-            A few lines of code
+            Sits between your agents
           </h2>
           <p className="text-muted-foreground text-lg max-w-md mx-auto">
-            Define contracts. Enforce policies. Ship safely.
+            Define handoff contracts. Enforce delegation scope. Validate before
+            the next agent ever sees the payload.
           </p>
         </motion.div>
 
