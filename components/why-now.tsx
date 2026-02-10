@@ -22,7 +22,7 @@ export function WhyNow() {
               AI systems &mdash; including autonomous agents making financial,
               legal, and healthcare decisions &mdash; must comply with
               mandatory risk management, transparency, human oversight, and
-              record-keeping requirements. Fines reach &euro;40M or 7% of
+              record-keeping requirements. Fines reach &euro;35M or 7% of
               global turnover.
             </p>
             <p>

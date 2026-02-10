@@ -19,7 +19,7 @@ const features: Feature[] = [
     points: [
       "Agent-to-agent handoff contract validation",
       "Delegation chain and scope narrowing tests",
-      "Combinatorial state space exploration",
+      "Fault injection and edge case simulation",
       "Regression testing for coordination protocols",
     ],
   },
@@ -28,10 +28,10 @@ const features: Feature[] = [
     title: "Monitor",
     subtitle: "See how failures propagate across your agent network",
     points: [
-      "Cross-agent trace visualization",
-      "Cascading failure detection and circuit breakers",
-      "Real-time inter-agent message validation",
-      "Privilege escalation and authority creep alerts",
+      "Cross-agent trace logging",
+      "Cascading failure detection",
+      "Inter-agent message validation",
+      "Privilege escalation detection",
     ],
   },
   {
@@ -39,9 +39,9 @@ const features: Feature[] = [
     title: "Comply",
     subtitle: "Prove what your agents did and why",
     points: [
-      "EU AI Act-ready audit trails",
+      "Audit trails designed for EU AI Act compliance",
       "Immutable record of every handoff and delegation",
-      "Automated compliance reporting (SOX, SEC, FINRA)",
+      "Compliance reporting for regulated industries",
       "Agent identity and permission management",
     ],
   },

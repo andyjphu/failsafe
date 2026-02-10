@@ -53,14 +53,19 @@ export function CodeExample() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="rounded-xl border border-border/50 bg-card overflow-hidden shadow-[0_0_80px_rgba(120,119,198,0.04)]"
         >
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-border/30">
-            <div className="flex gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
-              <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
-              <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border/30">
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
+                <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
+                <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
+              </div>
+              <span className="text-[11px] text-muted-foreground/50 ml-2 font-mono">
+                main.py
+              </span>
             </div>
-            <span className="text-[11px] text-muted-foreground/50 ml-2 font-mono">
-              main.py
+            <span className="text-[10px] text-muted-foreground/30 font-mono">
+              API preview
             </span>
           </div>
 

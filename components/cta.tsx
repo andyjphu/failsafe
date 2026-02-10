@@ -18,21 +18,25 @@ export function CTA() {
             Your agents need management
           </h2>
           <p className="text-muted-foreground text-lg mb-12 max-w-lg mx-auto">
-            Open source. Protocol-native. Works with A2A, MCP, and every major
-            agent framework.
+            Protocol-native. Designed for A2A, MCP, and major agent frameworks.
+            Free during beta.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <Button size="lg" className="text-sm px-8 rounded-full">
-              Apply for Early Access
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="text-sm group rounded-full"
-            >
-              Join Design Partners
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Button>
+            <a href="https://github.com/Haneesh25/FailSafe" target="_blank" rel="noopener noreferrer">
+              <Button size="lg" className="text-sm px-8 rounded-full">
+                Apply for Early Access
+              </Button>
+            </a>
+            <a href="https://github.com/Haneesh25/FailSafe" target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="outline"
+                size="lg"
+                className="text-sm group rounded-full"
+              >
+                View on GitHub
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Button>
+            </a>
           </div>
         </motion.div>
       </div>

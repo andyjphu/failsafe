@@ -11,33 +11,17 @@ export function Footer() {
 
         <div className="flex items-center gap-8 text-[13px] text-muted-foreground/60">
           <a
-            href="#"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            Docs
-          </a>
-          <a
-            href="#"
+            href="https://github.com/Haneesh25/FailSafe"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hover:text-foreground transition-colors duration-200"
           >
             GitHub
           </a>
-          <a
-            href="#"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            Blog
-          </a>
-          <a
-            href="#"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            Twitter
-          </a>
         </div>
 
         <p className="text-[13px] text-muted-foreground/40">
-          &copy; 2025 Failsafe
+          &copy; 2025&ndash;2026 Failsafe
         </p>
       </div>
     </footer>

@@ -28,28 +28,20 @@ export function Navbar() {
             Features
           </a>
           <a
-            href="#"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            Docs
-          </a>
-          <a
-            href="#"
+            href="https://github.com/Haneesh25/FailSafe"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hover:text-foreground transition-colors duration-200"
           >
             GitHub
           </a>
-          <a
-            href="#"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            Blog
-          </a>
         </div>
 
-        <Button size="sm" className="text-xs rounded-full h-8 px-4">
-          Early Access
-        </Button>
+        <a href="https://github.com/Haneesh25/FailSafe" target="_blank" rel="noopener noreferrer">
+          <Button size="sm" className="text-xs rounded-full h-8 px-4">
+            Early Access
+          </Button>
+        </a>
       </div>
     </motion.nav>
   );

@@ -8,8 +8,8 @@ import { ArrowRight } from "lucide-react";
 const frameworks = ["A2A Protocol", "MCP", "LangGraph", "AutoGen", "CrewAI"];
 
 const stats = [
-  { value: "40%", label: "of agent projects canceled by 2027", cite: "Gartner, 2025" },
-  { value: "41–87%", label: "multi-agent failure rate in production", cite: "NeurIPS, 2025" },
+  { value: "40%", label: "of agent projects abandoned by 2027", cite: "Gartner, 2025" },
+  { value: "41–87%", label: "multi-agent failure rate in production", cite: "arXiv, 2025" },
   { value: "Aug 2026", label: "EU AI Act becomes enforceable", cite: "EU Article 113" },
 ];
 
@@ -79,17 +79,21 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex items-center justify-center gap-4"
         >
-          <Button size="lg" className="text-sm px-8 rounded-full">
-            Apply for Early Access
-          </Button>
-          <Button
-            variant="ghost"
-            size="lg"
-            className="text-sm text-muted-foreground group rounded-full"
-          >
-            Documentation
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Button>
+          <a href="https://github.com/Haneesh25/FailSafe" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="text-sm px-8 rounded-full">
+              Apply for Early Access
+            </Button>
+          </a>
+          <a href="https://github.com/Haneesh25/FailSafe#readme" target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="ghost"
+              size="lg"
+              className="text-sm text-muted-foreground group rounded-full"
+            >
+              Documentation
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Button>
+          </a>
         </motion.div>
 
         {/* Stats */}
@@ -124,16 +128,21 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="flex items-center justify-center gap-3 mt-12 text-[13px] text-muted-foreground/30"
+          className="flex flex-col items-center gap-2 mt-12"
         >
-          {frameworks.map((fw, i) => (
-            <span key={fw} className="flex items-center gap-3">
-              {i > 0 && (
-                <span className="text-muted-foreground/15">&middot;</span>
-              )}
-              {fw}
-            </span>
-          ))}
+          <span className="text-[11px] text-muted-foreground/20 uppercase tracking-widest">
+            Designed for
+          </span>
+          <div className="flex items-center justify-center gap-3 text-[13px] text-muted-foreground/30">
+            {frameworks.map((fw, i) => (
+              <span key={fw} className="flex items-center gap-3">
+                {i > 0 && (
+                  <span className="text-muted-foreground/15">&middot;</span>
+                )}
+                {fw}
+              </span>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
