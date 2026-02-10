@@ -53,7 +53,7 @@ export function Hero() {
           <span className="bg-gradient-to-b from-foreground via-foreground/90 to-foreground/40 bg-clip-text text-transparent">
             Safety infrastructure
             <br />
-            for AI agents
+            for Multi-AI Agent systems
           </span>
         </motion.h1>
 
