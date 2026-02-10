@@ -14,17 +14,21 @@ export function CTA() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-[-0.02em] mb-6">
             Ship safer agents
           </h2>
-          <p className="text-muted-foreground text-lg mb-10 max-w-lg mx-auto">
-            Open source and framework agnostic. Zero runtime dependencies.
+          <p className="text-muted-foreground text-lg mb-12 max-w-md mx-auto">
+            Open source. Framework agnostic. Zero runtime dependencies.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <Button size="lg" className="text-sm px-8">
+            <Button size="lg" className="text-sm px-8 rounded-full">
               Get Started
             </Button>
-            <Button variant="outline" size="lg" className="text-sm group">
+            <Button
+              variant="outline"
+              size="lg"
+              className="text-sm group rounded-full"
+            >
               Star on GitHub
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Button>

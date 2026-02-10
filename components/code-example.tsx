@@ -33,10 +33,10 @@ export function CodeExample() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] mb-4">
             A few lines of code
           </h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-md mx-auto">
             Define contracts. Enforce policies. Ship safely.
           </p>
         </motion.div>
@@ -46,20 +46,20 @@ export function CodeExample() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="rounded-xl border border-border/60 bg-card overflow-hidden"
+          className="rounded-xl border border-border/50 bg-card overflow-hidden shadow-[0_0_80px_rgba(120,119,198,0.04)]"
         >
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-border/40">
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-border/30">
             <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              <div className="w-3 h-3 rounded-full bg-neutral-700" />
+              <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
+              <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
+              <div className="w-2.5 h-2.5 rounded-full bg-foreground/10" />
             </div>
-            <span className="text-xs text-muted-foreground ml-2 font-mono">
+            <span className="text-[11px] text-muted-foreground/50 ml-2 font-mono">
               main.py
             </span>
           </div>
 
-          <pre className="p-6 text-[13px] font-mono leading-relaxed overflow-x-auto">
+          <pre className="p-6 text-[13px] font-mono leading-[1.7] overflow-x-auto text-foreground/90">
             <code dangerouslySetInnerHTML={{ __html: codeHTML }} />
           </pre>
         </motion.div>

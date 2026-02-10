@@ -9,34 +9,45 @@ export function Navbar() {
     <motion.nav
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl"
+      transition={{ duration: 0.4 }}
+      className="fixed top-0 left-0 right-0 z-50 border-b border-border/30 bg-background/60 backdrop-blur-2xl"
     >
-      <div className="mx-auto max-w-6xl flex items-center justify-between px-6 h-16">
+      <div className="mx-auto max-w-6xl flex items-center justify-between px-6 h-14">
         <a href="/" className="flex items-center gap-2">
-          <Shield className="h-5 w-5" />
-          <span className="font-semibold tracking-tight">failsafe</span>
+          <Shield className="h-[18px] w-[18px] text-foreground/80" />
+          <span className="font-semibold text-[15px] tracking-tight">
+            failsafe
+          </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+        <div className="hidden md:flex items-center gap-8 text-[13px] text-muted-foreground">
           <a
             href="#features"
-            className="hover:text-foreground transition-colors"
+            className="hover:text-foreground transition-colors duration-200"
           >
             Features
           </a>
-          <a href="#" className="hover:text-foreground transition-colors">
+          <a
+            href="#"
+            className="hover:text-foreground transition-colors duration-200"
+          >
             Docs
           </a>
-          <a href="#" className="hover:text-foreground transition-colors">
+          <a
+            href="#"
+            className="hover:text-foreground transition-colors duration-200"
+          >
             GitHub
           </a>
-          <a href="#" className="hover:text-foreground transition-colors">
+          <a
+            href="#"
+            className="hover:text-foreground transition-colors duration-200"
+          >
             Blog
           </a>
         </div>
 
-        <Button size="sm" className="text-sm">
+        <Button size="sm" className="text-xs rounded-full h-8 px-4">
           Get Started
         </Button>
       </div>
