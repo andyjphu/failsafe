@@ -27,6 +27,12 @@ export function Navbar() {
           >
             Features
           </a>
+          <a
+            href="#team"
+            className="hover:text-foreground transition-colors duration-200"
+          >
+            Team
+          </a>
         </div>
 
         <Button size="sm" className="text-xs rounded-full h-8 px-4">

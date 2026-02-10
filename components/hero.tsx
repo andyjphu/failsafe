@@ -82,14 +82,16 @@ export function Hero() {
           <Button size="lg" className="text-sm px-8 rounded-full">
             Apply for Early Access
           </Button>
-          <Button
-            variant="ghost"
-            size="lg"
-            className="text-sm text-muted-foreground group rounded-full"
-          >
-            Documentation
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Button>
+          <a href="#features">
+            <Button
+              variant="ghost"
+              size="lg"
+              className="text-sm text-muted-foreground group rounded-full"
+            >
+              Learn More
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Button>
+          </a>
         </motion.div>
 
         {/* Stats */}
@@ -129,11 +131,11 @@ export function Hero() {
           <span className="text-[11px] text-muted-foreground/20 uppercase tracking-widest">
             Designed for
           </span>
-          <div className="flex items-center justify-center gap-3 text-[13px] text-muted-foreground/30">
+          <div className="flex items-center justify-center gap-3 flex-wrap text-[13px] text-muted-foreground/30">
             {frameworks.map((fw, i) => (
               <span key={fw} className="flex items-center gap-3">
                 {i > 0 && (
-                  <span className="text-muted-foreground/15">&middot;</span>
+                  <span className="hidden sm:inline text-muted-foreground/15">&middot;</span>
                 )}
                 {fw}
               </span>

@@ -21,7 +21,7 @@ const people = [
 
 export function Founders() {
   return (
-    <section className="py-32 border-t border-border/40">
+    <section id="team" className="py-32 border-t border-border/40">
       <div className="mx-auto max-w-2xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -29,6 +29,9 @@ export function Founders() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
+          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] mb-6 text-center">
+            Who we are
+          </h2>
           <p className="text-muted-foreground text-center text-lg leading-relaxed mb-16">
             Two engineers who met through a mutual friend in 2025, travelled the
             world together, and saw the same thing coming: multi-agent systems
