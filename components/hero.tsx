@@ -8,9 +8,9 @@ import { ArrowRight } from "lucide-react";
 const frameworks = ["A2A Protocol", "MCP", "LangGraph", "AutoGen", "CrewAI"];
 
 const stats = [
-  { value: "40%", label: "of agent projects canceled by 2027" },
-  { value: "87%", label: "multi-agent failure rate in production" },
-  { value: "Aug 2026", label: "EU AI Act becomes enforceable" },
+  { value: "40%", label: "of agent projects canceled by 2027", cite: "Gartner, 2025" },
+  { value: "41–87%", label: "multi-agent failure rate in production", cite: "NeurIPS, 2025" },
+  { value: "Aug 2026", label: "EU AI Act becomes enforceable", cite: "EU Article 113" },
 ];
 
 export function Hero() {
@@ -110,6 +110,9 @@ export function Hero() {
                 </div>
                 <div className="text-[11px] text-muted-foreground/50 mt-1">
                   {stat.label}
+                </div>
+                <div className="text-[10px] text-muted-foreground/30 mt-0.5">
+                  {stat.cite}
                 </div>
               </div>
             </div>
