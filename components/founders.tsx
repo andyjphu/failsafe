@@ -11,11 +11,11 @@ const people = [
     initials: "AP",
   },
   {
-    name: "Haneesh",
+    name: "Haneesh Tummalapalli",
     role: "Co-founder",
     background: "Former Google",
     school: "UT Dallas",
-    initials: "H",
+    initials: "HT",
   },
 ];
 

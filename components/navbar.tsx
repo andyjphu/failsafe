@@ -27,21 +27,11 @@ export function Navbar() {
           >
             Features
           </a>
-          <a
-            href="https://github.com/Haneesh25/FailSafe"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            GitHub
-          </a>
         </div>
 
-        <a href="https://github.com/Haneesh25/FailSafe" target="_blank" rel="noopener noreferrer">
-          <Button size="sm" className="text-xs rounded-full h-8 px-4">
-            Early Access
-          </Button>
-        </a>
+        <Button size="sm" className="text-xs rounded-full h-8 px-4">
+          Early Access
+        </Button>
       </div>
     </motion.nav>
   );

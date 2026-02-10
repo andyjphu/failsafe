@@ -79,21 +79,17 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex items-center justify-center gap-4"
         >
-          <a href="https://github.com/Haneesh25/FailSafe" target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="text-sm px-8 rounded-full">
-              Apply for Early Access
-            </Button>
-          </a>
-          <a href="https://github.com/Haneesh25/FailSafe#readme" target="_blank" rel="noopener noreferrer">
-            <Button
-              variant="ghost"
-              size="lg"
-              className="text-sm text-muted-foreground group rounded-full"
-            >
-              Documentation
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Button>
-          </a>
+          <Button size="lg" className="text-sm px-8 rounded-full">
+            Apply for Early Access
+          </Button>
+          <Button
+            variant="ghost"
+            size="lg"
+            className="text-sm text-muted-foreground group rounded-full"
+          >
+            Documentation
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Button>
         </motion.div>
 
         {/* Stats */}

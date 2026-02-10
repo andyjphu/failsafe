@@ -22,21 +22,17 @@ export function CTA() {
             Free during beta.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <a href="https://github.com/Haneesh25/FailSafe" target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="text-sm px-8 rounded-full">
-                Apply for Early Access
-              </Button>
-            </a>
-            <a href="https://github.com/Haneesh25/FailSafe" target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-sm group rounded-full"
-              >
-                View on GitHub
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Button>
-            </a>
+            <Button size="lg" className="text-sm px-8 rounded-full">
+              Apply for Early Access
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="text-sm group rounded-full"
+            >
+              Contact Us
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Button>
           </div>
         </motion.div>
       </div>
