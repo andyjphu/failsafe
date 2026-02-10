@@ -8,8 +8,8 @@ import { ArrowRight } from "lucide-react";
 const frameworks = ["A2A Protocol", "MCP", "LangGraph", "AutoGen", "CrewAI"];
 
 const stats = [
-  { value: "40%", label: "of agent projects canceled by 2027", source: "Gartner" },
-  { value: "87%", label: "multi-agent failure rate in production", source: "NeurIPS" },
+  { value: "40%", label: "of agent projects canceled by 2027" },
+  { value: "87%", label: "multi-agent failure rate in production" },
   { value: "Aug 2026", label: "EU AI Act becomes enforceable" },
 ];
 

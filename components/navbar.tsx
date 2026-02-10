@@ -48,7 +48,7 @@ export function Navbar() {
         </div>
 
         <Button size="sm" className="text-xs rounded-full h-8 px-4">
-          Get Started
+          Early Access
         </Button>
       </div>
     </motion.nav>
