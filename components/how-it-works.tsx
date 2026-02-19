@@ -1,6 +1,6 @@
-import { STEPS } from '../lib/constants'
+import { STEPS } from "@/lib/constants";
 
-export default function HowItWorks() {
+export function HowItWorks() {
   return (
     <section className="px-6 py-24 border-t border-border">
       <div className="max-w-6xl mx-auto">
@@ -12,7 +12,7 @@ export default function HowItWorks() {
           {STEPS.map((step, i) => (
             <div
               key={step.number}
-              className={i > 0 ? 'md:border-l md:border-border md:pl-12' : ''}
+              className={i > 0 ? "md:border-l md:border-border md:pl-12" : ""}
             >
               <span className="text-xs font-mono text-text-muted mb-4 block">
                 {step.number}
@@ -28,5 +28,5 @@ export default function HowItWorks() {
         </div>
       </div>
     </section>
-  )
+  );
 }

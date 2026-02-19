@@ -1,44 +1,31 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { NAV_LINKS } from "@/lib/constants";
 
 export function Navbar() {
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/30 bg-background/60 backdrop-blur-2xl"
-    >
-      <div className="mx-auto max-w-6xl flex items-center justify-between px-6 h-14">
-        <a href="/" className="flex items-center gap-2">
-          <Shield className="h-[18px] w-[18px] text-foreground/80" />
-          <span className="font-semibold text-[15px] tracking-tight">
-            failsafe
-          </span>
+    <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-border">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" className="text-text font-bold text-lg tracking-tight no-underline">
+          PhT Labs
         </a>
 
-        <div className="hidden md:flex items-center gap-8 text-[13px] text-muted-foreground">
+        <div className="flex items-center gap-8">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-sm font-medium text-text-muted hover:text-text transition-colors no-underline hidden sm:block"
+            >
+              {link.label}
+            </a>
+          ))}
           <a
-            href="#features"
-            className="hover:text-foreground transition-colors duration-200"
+            href="#install"
+            className="text-sm font-medium px-4 py-2 border border-text text-text hover:bg-text hover:text-white transition-colors no-underline"
           >
-            Features
-          </a>
-          <a
-            href="#team"
-            className="hover:text-foreground transition-colors duration-200"
-          >
-            Team
+            Get Started
           </a>
         </div>
-
-        <Button size="sm" className="text-xs rounded-full h-8 px-4">
-          Early Access
-        </Button>
       </div>
-    </motion.nav>
+    </nav>
   );
 }

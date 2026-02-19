@@ -1,16 +1,28 @@
-import { Shield } from "lucide-react";
+import { VscGithubAlt } from "react-icons/vsc";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/30 py-10">
-      <div className="mx-auto max-w-6xl px-6 flex flex-col items-center gap-4">
-        <div className="flex items-center gap-2 text-muted-foreground/60">
-          <Shield className="h-4 w-4" />
-          <span className="text-[13px] font-medium">failsafe</span>
-        </div>
-        <p className="text-[13px] text-muted-foreground/40">
-          &copy; 2025&ndash;2026 Failsafe
+    <footer className="border-t border-border">
+      <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="text-sm text-text-muted">
+          PhT Labs &copy; {new Date().getFullYear()}
         </p>
+
+        <div className="flex items-center gap-6">
+          <a
+            href="#"
+            className="text-sm text-text-muted hover:text-text transition-colors no-underline inline-flex items-center gap-1.5"
+          >
+            <VscGithubAlt size={16} />
+            GitHub
+          </a>
+          <a
+            href="#"
+            className="text-sm text-text-muted hover:text-text transition-colors no-underline"
+          >
+            Docs
+          </a>
+        </div>
       </div>
     </footer>
   );

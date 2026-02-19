@@ -1,6 +1,6 @@
-import { HiOutlinePlay } from 'react-icons/hi2'
+import { HiOutlinePlay } from "react-icons/hi2";
 
-export default function VideoDemo() {
+export function VideoDemo() {
   return (
     <section className="px-6 pb-24">
       <div className="max-w-4xl mx-auto">
@@ -10,5 +10,5 @@ export default function VideoDemo() {
         </div>
       </div>
     </section>
-  )
+  );
 }
