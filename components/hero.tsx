@@ -1,4 +1,5 @@
 import { VscGithubAlt } from "react-icons/vsc";
+import { RegistrationMarks } from "@/components/registration-marks";
 
 export function Hero() {
   return (
@@ -36,21 +37,25 @@ export function Hero() {
         </div>
 
         <div className="flex justify-center md:justify-end">
-          <div
-            className="w-full max-w-sm md:max-w-none"
-            style={{
-              boxShadow: "0 0 4px 2px rgba(0,0,0,0.1), 0 0 4px 2px rgba(0,0,0,0.12)",
-            }}
-          >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full aspect-square object-cover block"
+          <div className="relative w-full max-w-sm md:max-w-none">
+            <RegistrationMarks />
+
+            <div
+              className="relative z-10"
+              style={{
+                boxShadow: "0 0 40px 2px rgba(0,0,0,0.05), 0 0 4px 2px rgba(0,0,0,0.05)",
+              }}
             >
-              <source src="/Code.mp4" type="video/mp4" />
-            </video>
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full aspect-square object-cover block"
+              >
+                <source src="/Code.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
         </div>
       </div>
