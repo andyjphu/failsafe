@@ -90,3 +90,25 @@ When adding shadow to dark content (e.g., a dark-themed code video) on a white b
 Applying `mask-image` with a radial gradient to a dark video/image creates a dark vignette that looks like a black hole — the transparent mask reveals the page background, but the remaining visible content is dark, so the fade-to-transparent reads as fade-to-black.
 
 **Rule:** Prefer `box-shadow` or separate decorative elements (like registration marks) over `mask-image` when the content is dark and the background is light. Mask-image works best when content and background have similar luminance.
+
+## Scroll-Triggered Animations: Lightweight Pattern
+
+This site uses scroll-triggered fade-up animations with zero external dependencies. Reference: `components/fade-in.tsx`.
+
+**Pattern:** A single `FadeIn` client component wraps any element. It uses `IntersectionObserver` (threshold 0.1) to detect when the element enters the viewport, then triggers a CSS `@keyframes fade-up` animation via inline styles.
+
+Key design decisions:
+
+- **CSS keyframes, not JS animation.** The `fade-up` keyframe in `globals.css` animates only `opacity` and `transform` — both GPU-composited properties. No layout thrash, no JS `requestAnimationFrame` loops.
+- **`animation: ... both` is critical.** The `both` fill mode means `opacity: 0` is held before the animation starts (respecting the delay) and `opacity: 1` is held after it ends. Without `both`, elements flash visible before the delay kicks in.
+- **Trigger once, disconnect.** The observer disconnects after the first intersection. Elements don't re-animate on scroll back up. This is intentional — re-triggering on every scroll looks gimmicky.
+- **Stagger via `delay` prop, not separate observers.** Grouped elements (e.g., hero text blocks, feature cards) share the same viewport trigger but have increasing `delay` values (0, 80, 160ms). This creates a cascading feel without the complexity of coordinating multiple observers.
+- **Keep durations short and distances small.** 400–500ms duration, 16px translateY. Users shouldn't *notice* the animation — it should just make the page feel alive.
+
+Stagger conventions used:
+- Hero text blocks: 80ms increments (0, 80, 160, 240ms)
+- Hero video: 300ms (after all text)
+- Install section: 80ms increments (title 0, pill 80, stepper 160)
+- Feature cards: 60ms increments per card
+
+**What NOT to do:** Don't use a heavy animation library (framer-motion, GSAP) for simple entrance animations. The `FadeIn` component is ~20 lines and handles all our use cases. Don't animate `width`, `height`, `margin`, or other layout properties — stick to `opacity` and `transform`.

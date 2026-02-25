@@ -86,7 +86,20 @@ Graph-paper-style `+` crosshair marks placed at corners and grid intersections. 
 - **Only visible on `lg:` breakpoint** for grid marks (the 3-column layout).
 - When adding marks to new sections, use `components/registration-marks.tsx` for simple 4-corner marks. For grid intersections, follow the `GridMarks` pattern in `features.tsx`.
 
+## Motion & Animation
+
+Subtle scroll-triggered entrance animations. Elements fade up as they enter the viewport. See `components/fade-in.tsx`.
+
+- **Animation:** `fade-up` keyframe — `opacity: 0 → 1`, `translateY(16px) → 0`, 500ms ease-out.
+- **Trigger:** IntersectionObserver, fires once (no re-animation on scroll back).
+- **Stagger:** Grouped elements use increasing `delay` values. Conventions:
+  - Hero text: 80ms increments (0, 80, 160, 240ms); video at 300ms
+  - Install section: 80ms increments (title 0, pill 80, stepper 160)
+  - Feature cards: 60ms per card
+- **Only animate `opacity` and `transform`.** These are GPU-composited and cause no layout recalculation.
+- **No animation libraries.** The `FadeIn` component handles all cases.
+
 ## Content Patterns
 
-- **Overline label → Heading → Body** is the standard content block pattern (see Hero, InstallSection, HowItWorks).
-- Numbered steps use `font-mono` for the number and are zero-padded: `"01"`, `"02"`, `"03"`.
+- **Overline label → Heading → Body** is the standard content block pattern (see Hero, InstallSection).
+- Numbered steps use `font-mono` for the number and are zero-padded: `"00"`, `"01"`, `"02"`, `"03"`, `"04"`.
