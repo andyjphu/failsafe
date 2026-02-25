@@ -75,6 +75,17 @@ Both styles: no border-radius, `transition-colors`, `no-underline`.
 - Feature icons: `size={28}`, `text-text-muted`, with `mb-5` spacing.
 - Inline icons (buttons, links): `size={16}`, inherit text color.
 
+## Registration Marks
+
+Graph-paper-style `+` crosshair marks placed at corners and grid intersections. These reinforce the "built by engineers" aesthetic.
+
+- **Where used:** Hero video corners (`components/registration-marks.tsx`), Features grid intersections (`GridMarks` in `components/features.tsx`).
+- **Arms are 1px lines** in `var(--color-border)` (`#e5e5e5`), fading to transparent at the tips via `linear-gradient`.
+- **Arms only extend outward** from the content — no arms pointing inward under the content.
+- **Staggered lengths** (40–70px range) for an organic, hand-plotted feel.
+- **Only visible on `lg:` breakpoint** for grid marks (the 3-column layout).
+- When adding marks to new sections, use `components/registration-marks.tsx` for simple 4-corner marks. For grid intersections, follow the `GridMarks` pattern in `features.tsx`.
+
 ## Content Patterns
 
 - **Overline label → Heading → Body** is the standard content block pattern (see Hero, InstallSection, HowItWorks).

@@ -1,4 +1,5 @@
 import { VscGithubAlt } from "react-icons/vsc";
+import { GITHUB_URL } from "@/lib/constants";
 
 export function Footer() {
   return (
@@ -10,17 +11,11 @@ export function Footer() {
 
         <div className="flex items-center gap-6">
           <a
-            href="#"
+            href={GITHUB_URL}
             className="text-sm text-text-muted hover:text-text transition-colors no-underline inline-flex items-center gap-1.5"
           >
             <VscGithubAlt size={16} />
             GitHub
-          </a>
-          <a
-            href="#"
-            className="text-sm text-text-muted hover:text-text transition-colors no-underline"
-          >
-            Docs
           </a>
         </div>
       </div>

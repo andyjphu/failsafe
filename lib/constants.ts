@@ -80,37 +80,151 @@ export const STEPS: Step[] = [
   },
 ];
 
+export const GITHUB_URL = "https://github.com/Haneesh25/FailSafe/tree/main/failsafe-pip-package";
+
 export const NAV_LINKS = [
-  { label: "Docs", href: "#install" },
-  { label: "GitHub", href: "#" },
+  { label: "GitHub", href: GITHUB_URL },
 ];
 
 export const INSTALL_COMMAND = "pip install failsafe-ai";
 
-export const USAGE_CODE = `from failsafe import FailSafe
+export interface CodeDemoStep {
+  number: string;
+  title: string;
+  description: string;
+  code: string;
+  addedLines: number[];
+  removedLines: number[];
+}
 
-fs = FailSafe(mode="block")
+export const CODE_DEMO_STEPS: CodeDemoStep[] = [
+  {
+    number: "00",
+    title: "Your existing code",
+    description: "A standard LangGraph pipeline — research passes data directly to writer.",
+    code: `from langgraph.graph import StateGraph, START, END
 
-fs.register_agent("research_agent")
-fs.register_agent("writer_agent")
+graph = StateGraph(dict)
+graph.add_node("research", lambda s: {
+    "sources": ["arxiv.org"],
+    "api_key": "sk-secret-0x90F"  # leaked to next node
+})
+graph.add_node("writer", lambda s: print("writer sees:", s) or {})
+graph.add_edge(START, "research")
+graph.add_edge("research", "writer")
+graph.add_edge("writer", END)
+graph.compile().invoke({"query": "AI safety"})`,
+    addedLines: [],
+    removedLines: [],
+  },
+  {
+    number: "01",
+    title: "Import FailSafe",
+    description: "One new import alongside your existing LangGraph imports.",
+    code: `from langgraph.graph import StateGraph, START, END
+from failsafe import FailSafe
 
-fs.contract(
-    name="research-to-writer",
-    source="research_agent",
-    target="writer_agent",
-    allow=["query", "sources", "summary"],
-    deny=["api_key", "internal_config"],
-    require=["query", "sources"],
-)
+graph = StateGraph(dict)
+graph.add_node("research", lambda s: {
+    "sources": ["arxiv.org"],
+    "api_key": "sk-secret-0x90F"  # leaked to next node
+})
+graph.add_node("writer", lambda s: print("writer sees:", s) or {})
+graph.add_edge(START, "research")
+graph.add_edge("research", "writer")
+graph.add_edge("writer", END)
+graph.compile().invoke({"query": "AI safety"})`,
+    addedLines: [1],
+    removedLines: [],
+  },
+  {
+    number: "02",
+    title: "Define a contract",
+    description: "Register agents and declare what data is allowed or denied.",
+    code: `from langgraph.graph import StateGraph, START, END
+from failsafe import FailSafe
 
-result = await fs.handoff(
-    source="research_agent",
-    target="writer_agent",
-    payload={
-        "query": "AI safety",
-        "sources": ["arxiv.org/1234"],
-        "api_key": "sk-secret-123",  # blocked
-    },
-)
-# result.passed == False
-# "Denied fields found in payload: ['api_key']"`;
+fs = FailSafe(mode="block", audit_db=":memory:")
+fs.register_agent("research")
+fs.register_agent("writer")
+fs.contract(name="r2w", source="research", target="writer",
+            allow=["query", "sources"], deny=["api_key"])
+
+graph = StateGraph(dict)
+graph.add_node("research", lambda s: {
+    "sources": ["arxiv.org"],
+    "api_key": "sk-secret-0x90F"  # leaked to next node
+})
+graph.add_node("writer", lambda s: print("writer sees:", s) or {})
+graph.add_edge(START, "research")
+graph.add_edge("research", "writer")
+graph.add_edge("writer", END)
+graph.compile().invoke({"query": "AI safety"})`,
+    addedLines: [3, 4, 5, 6, 7],
+    removedLines: [],
+  },
+  {
+    number: "03",
+    title: "Write a guard",
+    description: "A 4-line function that validates handoffs and sanitizes the payload.",
+    code: `from langgraph.graph import StateGraph, START, END
+from failsafe import FailSafe
+
+fs = FailSafe(mode="block", audit_db=":memory:")
+fs.register_agent("research")
+fs.register_agent("writer")
+fs.contract(name="r2w", source="research", target="writer",
+            allow=["query", "sources"], deny=["api_key"])
+
+def guard(s):
+    r = fs.handoff_sync("research", "writer", s)
+    for v in r.violations: print(f"BLOCKED: {v.message}")
+    return r.sanitized_payload
+
+graph = StateGraph(dict)
+graph.add_node("research", lambda s: {
+    "sources": ["arxiv.org"],
+    "api_key": "sk-secret-0x90F"  # leaked to next node
+})
+graph.add_node("writer", lambda s: print("writer sees:", s) or {})
+graph.add_edge(START, "research")
+graph.add_edge("research", "writer")
+graph.add_edge("writer", END)
+graph.compile().invoke({"query": "AI safety"})`,
+    addedLines: [9, 10, 11, 12],
+    removedLines: [],
+  },
+  {
+    number: "04",
+    title: "Wire it in",
+    description: "Add the guard node and reroute edges: research → guard → writer.",
+    code: `from langgraph.graph import StateGraph, START, END
+from failsafe import FailSafe
+
+fs = FailSafe(mode="block", audit_db=":memory:")
+fs.register_agent("research")
+fs.register_agent("writer")
+fs.contract(name="r2w", source="research", target="writer",
+            allow=["query", "sources"], deny=["api_key"])
+
+def guard(s):
+    r = fs.handoff_sync("research", "writer", s)
+    for v in r.violations: print(f"BLOCKED: {v.message}")
+    return r.sanitized_payload
+
+graph = StateGraph(dict)
+graph.add_node("research", lambda s: {
+    "sources": ["arxiv.org"],
+    "api_key": "sk-secret-0x90F"
+})
+graph.add_node("guard", guard)
+graph.add_node("writer", lambda s: print("writer sees:", s) or {})
+graph.add_edge(START, "research")
+graph.add_edge("research", "guard")
+graph.add_edge("guard", "writer")
+graph.add_edge("writer", END)
+graph.compile().invoke({"query": "AI safety"})`,
+    addedLines: [19, 22, 23],
+    removedLines: [],
+  },
+];

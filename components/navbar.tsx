@@ -19,6 +19,12 @@ export function Navbar() {
             </a>
           ))}
           <a
+            href="/contact"
+            className="text-sm font-medium text-text-muted hover:text-text transition-colors no-underline hidden sm:block"
+          >
+            Get in Touch
+          </a>
+          <a
             href="#install"
             className="text-sm font-medium px-4 py-2 border border-text text-text hover:bg-text hover:text-white transition-colors no-underline"
           >

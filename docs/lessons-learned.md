@@ -54,3 +54,39 @@ Multiple commits (`52aeb87`, `e5ea644`) were needed to fix placeholder links (Bl
 Tailwind v4 does not reset `<a>` tag underlines by default (unlike some v3 setups with Preflight). Every `<a>` tag in this codebase explicitly includes `no-underline` in its className.
 
 **If you add a new link and it appears underlined, add `no-underline` to its classes.** This is not a bug — it's the expected behavior in Tailwind v4.
+
+## CSS Decorative Elements: Visibility Checklist
+
+When adding decorative CSS elements (registration marks, corner accents, dividers, etc.), work through these in order before showing the user:
+
+1. **Z-index:** If elements sit behind content with `bg-white` or any opaque background, they're invisible. Render decorative elements *after* the content in the DOM, or give them an explicit `z-index` higher than surrounding content.
+2. **Overflow clipping:** CSS grid containers with `gap-px bg-border` and any container with `overflow-hidden` will clip absolutely positioned children. Place decorative elements in a *sibling* or *parent* wrapper, not inside the clipping container.
+3. **Color contrast:** `#e5e5e5` (border color) on `#ffffff` (white background) is nearly invisible for 1px lines. If subtle marks aren't visible, use a darker color like `text-muted` (`#6b7280`) or increase line thickness.
+4. **Gradient direction:** When a gradient fades from solid to transparent, always verify which end is the visible one. If the solid end is hidden behind content and the transparent end is the only part showing, the element will appear invisible. Draw it out: which half does the user actually see?
+
+## Registration Marks Pattern
+
+This site uses "registration marks" — graph-paper-style `+` crosshair marks at element corners and grid intersections. Implementation reference: `components/registration-marks.tsx` (for simple 4-corner usage) and `GridMarks` in `components/features.tsx` (for grid intersections).
+
+Key implementation rules:
+
+- **Render only outward-facing arms.** Each corner gets exactly two arms extending *away* from the content. A top-left corner gets an upward arm and a leftward arm. Do not render a full `+` and rely on content to hide the inner arms — this causes z-index and clipping problems.
+- **For grid intersections:** Edge points get outward arms. Interior points get arms along the grid lines. The condition logic: a top-edge point gets an *upward* arm (extending outside), NOT a downward one. This is the opposite of the naive intuition (`if (!isTop) → upward arm` is wrong; `if (isTop) → upward arm` is correct for outward extension).
+- **Stagger arm lengths** for an organic feel. Use varying pixel values (40–70px range), not uniform sizes.
+- **Fade tips to transparent** using `linear-gradient(to <away-direction>, transparent, var(--color-border))` — solid near the content edge, transparent at the outer tip.
+- **Use `position: absolute`** on the arms relative to a `position: relative` wrapper that is *outside* any clipping container.
+
+## CSS `box-shadow` on Dark Content Against White Backgrounds
+
+When adding shadow to dark content (e.g., a dark-themed code video) on a white background:
+
+- Start with visible opacity (0.1–0.15 per layer), not subtle (0.05). It's easier to dial back than to wonder why nothing shows.
+- For a sharp, engineering-aesthetic shadow, use small blur values (4–20px). Large blur (40–60px) creates a soft glow that clashes with sharp design.
+- Two shadow layers work well: a tight edge shadow + a slightly wider ambient one.
+- The shadow applies to the *wrapper div*, not the `<video>` element directly.
+
+## CSS `mask-image` on Dark Content: Beware the Black Hole
+
+Applying `mask-image` with a radial gradient to a dark video/image creates a dark vignette that looks like a black hole — the transparent mask reveals the page background, but the remaining visible content is dark, so the fade-to-transparent reads as fade-to-black.
+
+**Rule:** Prefer `box-shadow` or separate decorative elements (like registration marks) over `mask-image` when the content is dark and the background is light. Mask-image works best when content and background have similar luminance.

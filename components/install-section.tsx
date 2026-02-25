@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { HiOutlineClipboard, HiOutlineCheck } from "react-icons/hi2";
-import { INSTALL_COMMAND, USAGE_CODE } from "@/lib/constants";
+import { INSTALL_COMMAND, CODE_DEMO_STEPS } from "@/lib/constants";
+import { FadeIn } from "@/components/fade-in";
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -24,10 +25,14 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
-function highlightPython(code: string) {
+function highlightPython(
+  code: string,
+  addedLines: Set<number> = new Set(),
+  removedLines: Set<number> = new Set(),
+) {
   const keywords = [
     "from", "import", "await", "async", "def", "class", "return",
-    "if", "else", "True", "False", "None",
+    "if", "else", "for", "in", "True", "False", "None",
   ];
   const lines = code.split("\n");
 
@@ -95,8 +100,20 @@ function highlightPython(code: string) {
       );
     }
 
+    const isAdded = addedLines.has(i);
+    const isRemoved = removedLines.has(i);
+
     return (
-      <div key={i} className="leading-relaxed">
+      <div
+        key={i}
+        className={`leading-relaxed pl-3 -ml-3 border-l-2 ${
+          isAdded
+            ? "border-emerald-500 bg-emerald-500/5"
+            : isRemoved
+              ? "border-red-400 bg-red-400/5 line-through opacity-60"
+              : "border-transparent"
+        }`}
+      >
         {parts.length > 0 ? parts : "\u00A0"}
       </div>
     );
@@ -104,35 +121,127 @@ function highlightPython(code: string) {
 }
 
 export function InstallSection() {
+  const [activeStep, setActiveStep] = useState(0);
+  const step = CODE_DEMO_STEPS[activeStep];
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveStep((s) => Math.min(s + 1, CODE_DEMO_STEPS.length - 1));
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveStep((s) => Math.max(s - 1, 0));
+    }
+  };
+
   return (
     <section id="install" className="px-6 py-24">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold tracking-tight text-center mb-12 text-text">
-          Get started in seconds
-        </h2>
+        <FadeIn>
+          <h2 className="text-3xl font-bold tracking-tight text-center mb-6 text-text">
+            Getting Started
+          </h2>
+        </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <p className="text-xs font-medium text-text-muted uppercase tracking-widest mb-3">
-              Install
-            </p>
-            <div className="relative bg-code-bg border border-code-border p-6 font-mono text-sm overflow-x-auto">
-              <CopyButton text={INSTALL_COMMAND} />
-              <span className="text-text-muted select-none">$ </span>
-              <span className="text-text">{INSTALL_COMMAND}</span>
+        {/* Standalone install pill */}
+        <FadeIn delay={80}>
+          <div className="relative bg-code-bg border border-code-border p-4 font-mono text-sm max-w-md mx-auto mb-10">
+            <CopyButton text={INSTALL_COMMAND} />
+            <span className="text-text-muted select-none">$ </span>
+            <span className="text-text">{INSTALL_COMMAND}</span>
+          </div>
+        </FadeIn>
+
+        {/* Stepper */}
+        <FadeIn delay={160}>
+          <div
+            className="border border-code-border"
+            onKeyDown={handleKeyDown}
+          >
+          {/* Desktop layout */}
+          <div className="hidden lg:grid lg:grid-cols-[240px_1fr]">
+            <nav className="border-r border-code-border py-2" role="tablist" aria-label="Integration steps">
+              {CODE_DEMO_STEPS.map((s, i) => (
+                <button
+                  key={s.number}
+                  role="tab"
+                  aria-selected={i === activeStep}
+                  onClick={() => setActiveStep(i)}
+                  className={`w-full text-left px-4 py-3 border-l-2 transition-colors ${
+                    i === activeStep
+                      ? "border-emerald-500 bg-emerald-500/5"
+                      : "border-transparent hover:bg-code-bg"
+                  }`}
+                >
+                  <span className={`text-xs font-mono block ${
+                    i === activeStep ? "text-emerald-600" : "text-text-muted"
+                  }`}>
+                    {s.number}
+                  </span>
+                  <span className={`text-sm font-medium ${
+                    i === activeStep ? "text-text" : "text-text-muted"
+                  }`}>
+                    {s.title}
+                  </span>
+                  {i === activeStep && (
+                    <span className="text-xs text-text-muted block mt-1">
+                      {s.description}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </nav>
+
+            <div role="tabpanel">
+              <div className="relative bg-code-bg p-6 font-mono text-sm overflow-x-auto min-h-[560px] transition-opacity duration-200">
+                <CopyButton text={step.code} />
+                {highlightPython(
+                  step.code,
+                  new Set(step.addedLines),
+                  new Set(step.removedLines),
+                )}
+              </div>
             </div>
           </div>
 
-          <div>
-            <p className="text-xs font-medium text-text-muted uppercase tracking-widest mb-3">
-              Usage
-            </p>
-            <div className="relative bg-code-bg border border-code-border p-6 font-mono text-sm overflow-x-auto">
-              <CopyButton text={USAGE_CODE} />
-              {highlightPython(USAGE_CODE)}
+          {/* Mobile layout */}
+          <div className="lg:hidden">
+            <div className="flex gap-2 p-4 overflow-x-auto border-b border-code-border" role="tablist">
+              {CODE_DEMO_STEPS.map((s, i) => (
+                <button
+                  key={s.number}
+                  role="tab"
+                  aria-selected={i === activeStep}
+                  onClick={() => setActiveStep(i)}
+                  className={`w-10 h-10 flex items-center justify-center font-mono text-xs shrink-0 transition-colors ${
+                    i === activeStep
+                      ? "bg-text text-white"
+                      : "border border-border text-text-muted hover:border-text hover:text-text"
+                  }`}
+                >
+                  {s.number}
+                </button>
+              ))}
+            </div>
+
+            <div className="px-4 pt-4 pb-2">
+              <p className="text-sm font-medium text-text">{step.title}</p>
+              <p className="text-xs text-text-muted mt-1">{step.description}</p>
+            </div>
+
+            <div role="tabpanel" className="p-4 pt-2">
+              <div className="relative bg-code-bg border border-code-border p-6 font-mono text-sm overflow-x-auto transition-opacity duration-200">
+                <CopyButton text={step.code} />
+                {highlightPython(
+                  step.code,
+                  new Set(step.addedLines),
+                  new Set(step.removedLines),
+                )}
+              </div>
             </div>
           </div>
-        </div>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
